@@ -1,0 +1,29 @@
+// This is any general theme stylings will go
+
+#page-sub-header {
+	position: relative;
+	padding-top: 5rem;
+	padding-bottom: 0;
+	text-align: center;
+	font-size: 1.25rem;
+	background-size: cover !important;
+    min-height: 20em;
+    
+}
+
+#page-sub-header.h1, #page-sub-header h1 {
+color: #ffffff;
+font-weight: 700;
+}
+
+#page-sub-header p {
+	color: #ffffff;
+    margin-bottom: 0;
+	line-height: 1.4;
+	font-size: 1.25rem;
+	font-weight: 600;
+    max-width: 43rem;
+	margin: 0 auto;
+}
+
+
