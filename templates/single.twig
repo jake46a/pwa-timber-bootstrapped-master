@@ -13,17 +13,29 @@
 					{{post.content}}
 				</div>
 			</section>
-
+	</article>
 			<!-- comment box -->
 			<section class="comment-box">
 				<!-- comments -->
-				<div class="comments">
-				    {% if post.comments %}
-					<h3> comments </h3>
-					{% for cmt in post.comments %}
-					    {% include "comment.twig" with {comment:cmt} %}
-					{% endfor %}
+
+				
+				<div>
+				    {% if post.comments.count == 1 %}
+    					<h2 class="comments-title">Thought on {{post.title}} </h2>
+                         {% elseif post.comments.count >1 %} 
+                         <h2 class="comments-title">Thoughts on {{post.title}} </h2>            
+                    {% endif %}
+                </div></br>
+                <div id="comments" class="comments-area">
+                    <ul class="comment-list">
+				  	{% if post.comments %}
+				  	
+				        {% for cmt in post.comments %}
+					        {% include "comment.twig" with {comment:cmt} %}
+				        {% endfor %}
+					
 				    {% endif %}
+				    </ul>
 				</div>
 
 				{% if post.comment_status == "closed" %}
