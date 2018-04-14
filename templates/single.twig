@@ -17,8 +17,6 @@
 			<!-- comment box -->
 			<section class="comment-box">
 				<!-- comments -->
-
-				
 				<div>
 				    {% if post.comments.count == 1 %}
     					<h2 class="comments-title">Thought on {{post.title}} </h2>
@@ -42,9 +40,15 @@
 					<p> comments for this post are closed </p>
 				{% else %}
 				    <!-- comment form -->
-				    {% include "comment-form.twig" %}
+				    {{ post.comment.form }}
+{% include "comment-form.twig" %}
 				{% endif %}
 			</section>
 		</article>
-	</div><!-- /content-wrapper -->
-{% endblock %}
+	</div>
+{% endblock %} 
+
+
+
+
+

@@ -1,11 +1,14 @@
+{{dump(comment)}}
+
 {% if loop.index is odd %}
-	<li id="comment-{{ loop.index }}" class="comment even thread-even depth-{{ (comment.depth+1) }}">
+	<li id="comment-{{ loop.index }}" class="comment even thread-even depth-{{ (comment.depth) }}">
 	{% elseif loop.index is even %}	
-	<li id="comment-{{ loop.index }}" class="comment odd alt thread-odd thread-alt depth-{{ (comment.depth+1) }}">
+	<li id="comment-{{ loop.index }}" class="comment odd alt thread-odd thread-alt depth-{{ (comment.depth) }}">
 {% endif %}
 <article id="div-comment-{{ loop.index }}" class="comment-body media mb-4">
                 <a class="pull-left" href="#">
-                    <img src="https://secure.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=50&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">                </a>
+                    <img src="{{comment.avatar(36)}}" class="avatar avatar-50 photo" width="50" height="50" alt="Image of {{comment.author.name}}"
+>                </a>
 
                 <div class="media-body">
                     <div class="media-body-wrap card">
@@ -22,13 +25,13 @@
                         
                         <div class="comment-content card-block">
                             <p>{{comment.comment_content|wpautop}}</p>
-                        </div><!-- .comment-content -->
-
-                        <footer class="reply comment-reply card-footer"><a rel="nofollow" class="comment-reply-link btn btn-primary" href="http://devuber.test/?p=1&replytocom=1#respond" onclick="return addComment.moveForm( &quot;div-comment-1&quot;, &quot;1&quot;, &quot;respond&quot;, &quot;1&quot; )" aria-label="Reply to A WordPress Commenter">Reply</a></footer><!-- .reply -->
+                        </div>
+                        <footer class="reply comment-reply card-footer"><a rel="nofollow" class="comment-reply-link btn btn-primary" href="http://devuber.test/?p=1&replytocom=1#respond" onclick="return addComment.moveForm( &quot;div-comment-1&quot;, &quot;1&quot;, &quot;respond&quot;, &quot;1&quot; )" aria-label="Reply to A WordPress Commenter">Reply</a></footer>
                     </div>
-                </div><!-- .media-body -->
+                </div
 
-            </article><!-- .comment-body -->
+            </article>
             
 
             </li>
+            
