@@ -3,7 +3,7 @@
   {% else %}
 <li id="comment-{{comment.ID}}" {{ fn('comment_class', class , comment.id)}} >
 {% endif %}
-  <article id="div-comment-{{comment.ID}}" class="comment-body media mb-4">
+  <article id="div-comment-{{comment.ID}}" class="comment-body media mb-4 mt-4">
     <img class="pull-left p-2" src="{{cmt.avatar(36)}}"></a>
       <div class="media-body">
         <div class="media-body-wrap card">
@@ -24,9 +24,10 @@
             <footer class="reply comment-reply card-footer">{{cmt.reply_link}}</footer>
           </div>
           {% for cmt in comment.children %}
-
+          {{dump(comment)}}</br>
+          {{cmt.comment_parent}}
           <ul class="list-unstyled comment-list">
-  					{% include "comment-child.twig" with {comment:cmt} %}
+  					{% include "comment.twig" with {comment:cmt} %}
           </ul>
   				{% endfor %}
 
@@ -34,4 +35,9 @@
       </article>
 
 
+				{% for cmt in comment.children %}
+        <ul class="list-unstyled comment-list">
+					{% include "comment-child.twig" with {comment:cmt} %}
+        </ul>
+				{% endfor %}
 </l1>

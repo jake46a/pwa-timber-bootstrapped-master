@@ -1,0 +1,57 @@
+
+{% if loop.index is odd %}
+<li id="comment-{{ comment.ID }}"
+	class="comment even thread-even depth-{{ (comment.depth)+1 }}">{#
+	add if parent #} {% elseif loop.index is even %}
+<li id="comment-{{ comment.ID }}"
+	class="comment odd alt thread-odd thread-alt depth-{{ (comment.depth)+1 }}">
+	{% endif %}
+
+
+		<div id="div-comment-{{ comment.ID }}" class="comment-body media mb-4">
+			<a class="pull-left" href="#"> <img src="{{comment.avatar}}"
+				class="avatar avatar-50 photo" width="50"
+				alt="Image of {{comment.author.name}}">
+			</a>
+			<div class="media-body">
+				<div class="media-body-wrap card">
+					<div class="card-header">
+						<h5 class="comment-author">
+							{{comment.author.name}}
+							says
+						</h5>
+						<time>
+							{{ comment.date }}
+						</time>
+					</div>
+					<div class="comment-content card-block">
+
+							<p>
+								{{comment.comment_content|wpautop}}
+							</p>
+
+					</div>
+
+					<footer class="reply comment-reply card-footer">
+						<a rel="nofollow" class="comment-reply-link btn btn-primary"
+							href="http://devuber.test/?p=1&replytocom={{ comment.id }}#respond"
+							onclick="return addComment.moveForm( " div-comment-
+							{{ comment.id }}", "{{ comment.id }}", "respond", "1" )" aria-label="Reply to {{comment.author.name}}">Reply</a>
+					</footer>
+				</div>
+
+			</div
+		</div>
+
+
+	</li><!-- child comments -->
+
+	{% if comment.children %}
+		<div="row">
+			<div class="children comments">
+				{% for cmt in comment.children %}
+				{% include "comment.twig" with {comment:cmt} %}
+				{% endfor %}
+			</div>
+		</div>
+			{% endif %}

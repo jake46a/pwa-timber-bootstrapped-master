@@ -1,54 +1,51 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<div class="content-wrapper">
-		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
-			<img src="{{ post.thumbnail.src|resize(1200, 300) }}">
-			<section class="article-content">
-				<h1 class="article-h1">{{ post.title }}</h1>
-				<p class="blog-author">
-					<span>By</span><a href="{{post.author.path}}"> {{ post.author.name }} </a><span>&bull;</span> {{ post.date }}
-				</p>
-				<div class="article-body">
-					{{post.content}}
-				</div>
-			</section>
-	</article>
-			<!-- comment box -->
-			<section class="comment-box">
-				<!-- comments -->
-				<div>
-				    {% if post.comments.count == 1 %}
-    					<h2 class="comments-title">Thought on {{post.title}} </h2>
-                         {% elseif post.comments.count >1 %} 
-                         <h2 class="comments-title">Thoughts on {{post.title}} </h2>            
-                    {% endif %}
-                </div></br>
-                <div id="comments" class="comments-area">
-                    <ul class="comment-list">
-				  	{% if post.comments %}
-				  	
-				        {% for cmt in post.comments %}
-					        {% include "comment.twig" with {comment:cmt} %}
-				        {% endfor %}
-					
-				    {% endif %}
-				    </ul>
-				</div>
+  <article id="post-{{ post.ID }}" class="post-type-{{ post.post_type }}">
+    <div class="post-thumbnail"><img src="{{ post.thumbnail.src|resize(1200, 300) }}"></div>
+    <header class="entry-header">
+      <h1 class="entry-title">{{ post.title }}</h1>
+      <div class="entry-meta">
+        <span>By</span>
+        <a href="{{post.author.path}}">
+          {{ post.author.name }}
+        </a>
+        <span>&bull;</span>
+        {{ post.date }}
+      </div>
+      {#end entry meta#}
+    </header>
+    <div <div class="entry-content">
+      {{post.content}}
+    </div> {#end entry content#}
+		<footer class="entry-footer">
+		<span class="cat-links">Posted in <a href="#" rel="category tag">Uncategorized</a></span>
+		</footer>
+</article>
+<div id="comments" class="comments-area">
+	{% if post.comments.count == 1 %}
+    <h2 class="comments-title mt-5">Thought on
+      {{post.title}}
+    </h2>
+  {% elseif post.comments.count >1 %}
+    <h2 class="comments-title mt-5">Thoughts on
+      {{post.title}}
+    </h2>
+	{% endif %}
+	<ul class="list-unstyled comment-list">
+    {% if post.comments %}
+    	{% for cmt in post.comments %}
+      	{% include "comment.twig" with {comment:cmt} %}
+    	{% endfor %}
+		{% endif %}
 
-				{% if post.comment_status == "closed" %}
-					<p> comments for this post are closed </p>
-				{% else %}
-				    <!-- comment form -->
-				    {{ post.comment.form }}
-{% include "comment-form.twig" %}
-				{% endif %}
-			</section>
-		</article>
-	</div>
-{% endblock %} 
-
-
-
-
-
+	</ul>
+  {% if post.comment_status == "closed" %}
+    <p>
+      comments for this post are closed
+    </p>
+  {% else %}
+    {% include "comment-form.twig" %}
+  {% endif %}
+</div>{# end comments#}
+{% endblock %}
