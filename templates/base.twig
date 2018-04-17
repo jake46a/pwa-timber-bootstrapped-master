@@ -1,82 +1,86 @@
-{% block html_head_container %} 
+{% block html_head_container %}
 
-{% include 'html-header.twig' %}
-	{% block head %}
-	{% endblock %}
-	</head>
+  {% include 'html-header.twig' %}
+  {% block head %}{% endblock %}
+</head>
 {% endblock %}
 
-	<body class="{{body_class}}" data-template="base.twig">
-		<header class="header" >
-			{% block header %}
-				<nav class="navbar navbar-dark bg-primary" role="navigation">
-					<div class="container">
-                        {% if theme.theme_mod('wpastartersite_logo') %}
-                                                    <a class="navbar-brand" href= "{{ site.url }}"> %}
-                            <img src="{{ theme.theme_mod('wpastartersite_logo')}}" alt="{{site.name}}">
-                            </a>
-                        {% else %}
-                           <a class="navbar-brand" href="{{site.url}}" rel="home">{{site.name}}</a>
-                        {% endif %}
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
+<body class="{{body_class}}" data-template="base.twig">
+<div id="page" class="site">
+  <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+  <header class="header">
+    {% block header %}
+      <nav class="navbar navbar-dark bg-primary" role="navigation">
+        <div class="container">
+          {% if theme.theme_mod('wpastartersite_logo') %}
+            <a class="navbar-brand" href="{{ site.url }}">
+              %}
+              <img src="{{ theme.theme_mod('wpastartersite_logo')}}" alt="{{site.name}}">
+            </a>
+          {% else %}
+            <a class="navbar-brand" href="{{site.url}}" rel="home">{{site.name}}</a>
+          {% endif %}
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-						<div id="navbar" class="collapse navbar-collapse justify-content-end">
-							{% include "menu.twig" with {'menu': menu.get_items} %}
-						</div>
-					</div><!-- end container -->
-				</nav>
-			{% endblock %}
-		</header>
+          <div id="navbar" class="collapse navbar-collapse justify-content-end">
+            {% include "menu.twig" with {
+              'menu' : menu.get_items
+            } %}
+					</div> {# end navbar#}
+          </div> {# end container #}
+        </nav>
+      {% endblock %}
+    </header>
 
-		 {% if function('is_front_page') and not theme.theme_mod('header_banner_visibility') %}
-		 
-            {% if theme.theme_mod('header_image', 'wpastartersite') %} 
-                <div id="page-sub-header" class ="container" style="background-image: url('{{ theme.theme_mod('header_image')}}')">
-                {% else %}
-                <div id="page-sub-header" class ="container">
-                {% endif %}
-                    <div class="container">
-                        <h1>
-                            {% if theme.theme_mod( 'header_banner_title_setting' ) %}
-                                    {{ theme.theme_mod('header_banner_title_setting')}}
-                                {% else %}
-                                    {{ 'Wordpress + Bootstrap4 + Timber' }}</br>
-                                    {{ 'A winning combination from PW.A'}}
-                            {% endif %}
-                        </h1>
-                        <p>
-                             {% if theme.theme_mod('header_banner_tagline_setting') %}
-                                {{ theme.theme_mod('header_banner_tagline_setting')}}
-                                {% else %}
-                                {{ 'To customize the contents of this header banner and other elements of your site, go to Dashboard > Appearance > Customize' }}
-                            {% endif %}
-                        </p>                                              
-                    </div>
-                </div>
-		{% endif %}
-		
+    {% if function('is_front_page')and not theme.theme_mod('header_banner_visibility') %}
 
-		<section id="content" role="main" class="container">
-			{% if title %}<h1>{{title}}</h1>{% endif %}
-			<div class="wrapper {{sidebar_class}}">
-				{% block content %}
-					Sorry, no content
-				{% endblock %}
-			</div>
-			{% if sidebar %}
-				<aside class="layout-sidebar">
-					{{sidebar}}
-				</aside>
-			{% endif %}
-		</section>
+      {% if theme.theme_mod('header_image', 'wpastartersite') %}
+        <div id="page-sub-header" class="container" style="background-image: url('{{ theme.theme_mod('header_image')}}')">
+        {% else %}
+          <div id="page-sub-header" class="container">
+          {% endif %}
+          <div class="container">
+            <h1>
+              {% if theme.theme_mod('header_banner_title_setting') %}
+                {{ theme.theme_mod('header_banner_title_setting')}}
+              {% else %}
+                {{ 'Wordpress + Bootstrap4 + Timber' }}</br>
+              {{ 'A winning combination from PW.A'}}
+            {% endif %}
+          </h1>
+          <p>
+            {% if theme.theme_mod('header_banner_tagline_setting') %}
+              {{ theme.theme_mod('header_banner_tagline_setting')}}
+            {% else %}
+              {{ 'To customize the contents of this header banner and other elements of your site, go to Dashboard > Appearance > Customize' }}
+            {% endif %}
+          </p>
+        </div> {#end container#}
+      </div> {# end page sub header #}
 
-		{% block footer %}
-			<footer id="footer">
-				{% include 'footer.twig' %}
-			</footer>
-			{{ function('wp_footer') }}
-		{% endblock %}
-	</body>
-</html>
+    {% endif %}
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <div class="row">
+          <section id="primary" class="content-area col-sm-12">
+            <main id="main" class="site-main" role="main">
+              {% block content %}
+                Sorry, no content
+              {% endblock %}
+						</main>
+          </section> {#end content area#}
+				</div>{#end roe#}
+			</div> {#end container#}
+		</div> {#end content#}
+          {% block footer %}
+            <footer id="footer">
+              {% include 'footer.twig' %}
+            </footer>
+            {{ function('wp_footer') }}
+          {% endblock %}
+        </div>{#end page #}
+      </body>
+    </html>
