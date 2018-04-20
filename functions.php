@@ -4,15 +4,15 @@ if ( ! class_exists( 'Timber' ) ) {
 	add_action( 'admin_notices', function() {
 		echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php') ) . '</a></p></div>';
 	});
-	
+
 	add_filter('template_include', function($template) {
 		return get_stylesheet_directory() . '/static/no-timber.html';
 	});
-	
+
 	return;
 }
 
-Timber::$dirname = array('templates', 'views');
+Timber::$dirname = array('templates', 'views', 'templates/partial', 'templates/components');
 
 class WpaStarterSite extends TimberSite {
 
@@ -80,6 +80,30 @@ function wpastartersite_content_width() {
 }
 add_action( 'after_setup_theme', 'wpastartersite_content_width', 0 );
 
+//sidebars-go here
+function wpastartersite_widgets_init() {
+register_sidebar( array(
+'name' => 'Footer Sidebar 1',
+'id' => 'footersidebar1',
+'description' => 'Appears in the footer area',
+'before_widget' => '<div class="card-header">',
+'after_widget' => '</p></div>',
+'before_title' => '<h3 class="card-title">',
+'after_title' => '</h3></div><div class="card-body"<p class="card-text">',
+) );
+
+register_sidebar( array(
+'name' => 'Footer Sidebar 2',
+'id' => 'footersidebar2',
+'description' => 'Appears in the footer area',
+'before_widget' => '<div class="card-header">',
+'after_widget' => '</p></div>',
+'before_title' => '<h3 class="card-title">',
+'after_title' => '</h3></div><div class="card-body"<p class="card-text">',
+) );
+}
+add_action( 'widgets_init', 'wpastartersite_widgets_init' );
+
 function wpastartersite_scripts() {
 wp_enqueue_style( 'wpastartersite-style', get_stylesheet_uri() );
     if(get_theme_mod( 'theme_option_setting' ) && get_theme_mod( 'theme_option_setting' ) !== 'default') {
@@ -112,10 +136,10 @@ wp_enqueue_style( 'wpastartersite-style', get_stylesheet_uri() );
     if(get_theme_mod( 'preset_style_setting' ) && get_theme_mod( 'preset_style_setting' ) !== 'default') {
         wp_enqueue_style( 'wpastartersite-'.get_theme_mod( 'preset_style_setting' ), get_template_directory_uri() . '/assets/src/presets/typography/'.get_theme_mod( 'preset_style_setting' ).'.css', false, '' );
     }
-    
+
     }
     add_action( 'wp_enqueue_scripts', 'wpastartersite_scripts' );
-    
+
 function wpastartersite_password_form() {
     global $post;
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
@@ -127,8 +151,8 @@ function wpastartersite_password_form() {
 }
 add_filter( 'the_password_form', 'wpastartersite_password_form' );
 
-    
-    
+
+
 
 
 /**
@@ -145,3 +169,7 @@ require get_template_directory() . '/assets/extras.php';
  * Customizer additions.
  */
 require get_template_directory() . '/assets/customizer.php';
+
+add_theme_support( 'post-thumbnails' );
+add_image_size( 'homepage-laptop', 720, 240 );
+add_image_size( 'homepage-desck', 900, 300 );

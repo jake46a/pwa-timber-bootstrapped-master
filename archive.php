@@ -17,6 +17,8 @@
 $templates = array( 'archive.twig', 'index.twig' );
 
 $context = Timber::get_context();
+$context['dynamic_sidebar1'] = Timber::get_widgets('footersidebar1');
+$context['dynamic_sidebar2'] = Timber::get_widgets('footersidebar2');
 
 $context['title'] = 'Archive';
 if ( is_day() ) {
