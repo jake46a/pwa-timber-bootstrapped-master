@@ -1,0 +1,29 @@
+{% block thememodsubheader %}
+  {% if function('is_front_page')and not theme.theme_mod('header_banner_visibility') %}
+    {% if theme.theme_mod('header_image', 'wpastartersite') %}
+      <div id="page-sub-header" class="container" style="background-image: url('{{ theme.theme_mod('header_image')}}')">
+      {% else %}
+        <div id="page-sub-header" class="container">
+        {% endif %}
+        <div class="container">
+          <h1>
+            {% if theme.theme_mod('header_banner_title_setting') %}
+              {{ theme.theme_mod('header_banner_title_setting')}}
+            {% else %}
+              {{ 'Wordpress + Bootstrap4 + Timber' }}</br>
+            {{ 'A winning combination from PW.A'}}
+          {% endif %}
+        </h1>
+        <p>
+          {% if theme.theme_mod('header_banner_tagline_setting') %}
+            {{ theme.theme_mod('header_banner_tagline_setting')}}
+          {% else %}
+            {{ 'To customize the contents of this header banner and other elements of your site, go to Dashboard > Appearance > Customize' }}
+          {% endif %}
+        </p>
+      </div>
+      {#end container#}
+    </div>
+    {# end page sub header #}
+  {% endif %}
+{% endblock %}

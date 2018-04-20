@@ -22,6 +22,8 @@
  */
 
 $context = Timber::get_context();
+$context['dynamic_sidebar1'] = Timber::get_widgets('footersidebar1');
+$context['dynamic_sidebar2'] = Timber::get_widgets('footersidebar2');
 $post = new TimberPost();
 $context['post'] = $post;
 Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );

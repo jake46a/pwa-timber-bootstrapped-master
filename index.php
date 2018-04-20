@@ -13,9 +13,9 @@
  * @since   Timber 0.1
  */
 $context = Timber::get_context();
-$context['posts'] = new Timber\PostQuery();
-$templates = array( 'index.twig' );
-if ( is_home() ) {
-	array_unshift( $templates, 'home.twig' );
-}
-Timber::render( $templates, $context );
+$context['dynamic_sidebar1'] = Timber::get_widgets('footersidebar1');
+$context['dynamic_sidebar2'] = Timber::get_widgets('footersidebar2');
+$templates = array( 'index.twig', 'base.twig' );
+ if ( is_home() ) {	 if ( is_home() ) {
+array_unshift( $templates, 'home.twig' );	 }	 }
+ Timber::render( $templates, $context );

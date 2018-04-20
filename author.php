@@ -12,6 +12,8 @@
 global $wp_query;
 
 $context          = Timber::get_context();
+$context['dynamic_sidebar1'] = Timber::get_widgets('footersidebar1');
+$context['dynamic_sidebar2'] = Timber::get_widgets('footersidebar2');
 $context['posts'] = new Timber\PostQuery();
 if ( isset( $wp_query->query_vars['author'] ) ) {
 	$author            = new Timber\User( $wp_query->query_vars['author'] );
